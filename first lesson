@@ -1,0 +1,25 @@
+#importing the dataset
+url='http://bit.ly/ML-Dataset'
+fuel_data = pd.read_csv(url, error_bad_lines=False)
+fuel_data
+
+fuel_data.describe(include='all')
+
+fuel_data.isnull().sum()
+
+fuel_data.groupby('fuel_unit')['fuel_unit'].count()
+
+fuel_data[['fuel_unit']] = fuel_data[['fuel_unit']].fillna(value='mcf')
+fuel_data.isnull().sum()
+#group by the fuel type code year and print the first entries in all the groups formed
+fuel_data.groupby('fuel_type_code_pudl').first()
+
+fuel_data.duplicated().any()
+
+fuel_data.groupby('fuel_type_code_pudl')['fuel_cost_per_unit_burned'].sum()
+
+fuel_data.skew()
+
+fuel_data.kurt()
+
+fuel_data.groupby('report_year')['fuel_cost_per_unit_delivered'].sum()
